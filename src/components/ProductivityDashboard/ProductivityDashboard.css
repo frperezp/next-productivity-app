@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+@font-face {
+  font-family: "Dosis";
+  src: url("../../assets/Dosis-VariableFont_wght.ttf") format("truetype");
+}
+
+body {
+  background-color: #1d1f2bff; /*#f5f5f5;*/
+  font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.app {
+  width: 600px;
+  max-height: 60vh;
+  padding-top: 20vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-edit {
+  display: flex;
+  flex-direction: row;
+  background-color: #2f313eff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Asegura que el formulario esté por encima de las cards */
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.input-title,
+.input-description {
+  font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: #2f313eff;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  font-size: 20px;
+  outline: none;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+.input-title {
+  font-weight: 600;
+}
+
+.input-title:focus,
+.input-description:focus {
+  font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
+  border-bottom: 2px solid #c59b00; /*#007bff;*/
+}
+
+.button-container {
+  padding: 10px;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button {
+  background-color: #ffc800;
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-self: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.add-button:hover {
+  background-color: #c59b00; /*#0056b3;*/
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  max-height: calc(80vh - 100px); /* Ajusta según la altura del formulario */
+  padding: 10px 0;
+}
+
+/* Oculta la barra de scroll */
+.task-list::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.task-list {
+  padding-bottom: 64px;
+  scrollbar-width: none; /* Oculta el scroll en Firefox */
+  -ms-overflow-style: none; /* Oculta el scroll en Internet Explorer y Edge */
+}
+
+.task-card {
+  display: flex;
+  align-items: center;
+  color: #e0e0e0;
+  background-color: #2f313eff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-card.completed {
+  background-color: #3d5135;
+}
+
+.custom-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: 2px solid #e0e0e0; /*#007bff;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.custom-checkbox.checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.check-icon {
+  color: #fff;
+  font-size: 16px;
+}
+
+.task-content {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.task-content {
+  margin: 0;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.descrip {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.completed-text {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.card-additives {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.priority-selector {
+  margin-top: 0px;
+}
+
+.trash-delete {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.red-icon {
+  color: red;
+}

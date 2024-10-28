@@ -1,0 +1,34 @@
+.priority-selector {
+  display: inline-block;
+}
+
+.priority-select {
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.priority-select.crítico {
+  background-color: #b83737; /*#ff4d4d;*/
+  color: #fff;
+}
+
+.priority-select.alta {
+  background-color: #c38900; /*#ffb300;*/
+  color: #fff;
+}
+
+.priority-select.baja {
+  background-color: #b0bd00; /*#eeff00;*/
+  color: #fff;
+}
+
+.priority-select.chill {
+  background-color: #409643; /* #4caf50;*/
+  color: #fff;
+}
