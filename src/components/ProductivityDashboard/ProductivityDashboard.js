@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductivityDashboard.css";
+import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -7,54 +8,39 @@ import { faPlus, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import PrioritySelector from "../PrioritySelector/PrioritySelector";
 
 const ProductivityDashboard = (props) => {
-  const [tasks, setTasks] = useState([
-    {
-      id: Date.now(),
-      title: "Tarea 1",
-      description: "Realizar lista de la compra de Mercadona",
-      completed: false,
-      priority: "Chill",
-    },
-    {
-      id: Date.now() + 1,
-      title: "Tarea 2",
-      description: "Ir a comprar a Mercadona",
-      completed: false,
-      priority: "Chill",
-    },
-    {
-      id: Date.now() + 2,
-      title: "Tarea 3",
-      description: "Deporte diario de 30 minutos",
-      completed: false,
-      priority: "Chill",
-    },
-    {
-      id: Date.now() + 3,
-      title: "Tarea 4",
-      description: "20 minutos de audio libro en inglés",
-      completed: false,
-      priority: "Chill",
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  const API_URL = "http://localhost:5000/tasks";
+
+  // Leer tareas
+  useEffect(() => {
+    axios
+      .get(API_URL)
+      .then((response) => {
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+  }, []);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleAddTask = () => {
     if (title.trim() && description.trim()) {
-      setTasks([
-        ...tasks,
-        {
-          id: Date.now(),
-          title: title,
-          description: description,
-          completed: false,
-          priority: "Chill",
-        },
-      ]);
+      const newTask = {
+        id: Date.now(),
+        title,
+        description,
+        completed: false,
+        priority: "Chill",
+      };
+      setTasks([...tasks, newTask]);
       setTitle("");
       setDescription("");
+      console.log("Añadimos la task " + newTask.id);
+      addTask(newTask);
     }
   };
 
@@ -63,6 +49,13 @@ const ProductivityDashboard = (props) => {
       const updatedTasks = prevTasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       );
+      console.log("****************");
+      console.log(id);
+      console.log(!tasks.filter((task) => task.id === id)[0].completed);
+      console.log("****************");
+      updateTask(id, {
+        completed: !tasks.filter((task) => task.id === id)[0].completed,
+      });
       sortByPriority(updatedTasks);
       // Ordena las tareas, moviendo las completadas al final
       updatedTasks.sort((a, b) => a.completed - b.completed);
@@ -71,10 +64,14 @@ const ProductivityDashboard = (props) => {
   };
 
   const handleDeleteTask = (id) => {
-    setTasks((prevTasks) => {
-      const auxTask = prevTasks.filter((task) => task.id !== id);
-      return auxTask;
-    });
+    if (window.confirm("¿Seguro que quieres eliminar la tarea?")) {
+      /* setTasks((prevTasks) => {
+        const auxTask = prevTasks.filter((task) => task.id !== id);
+        return auxTask;
+      });
+      console.log("Borramos la task " + id); */
+      deleteTask(id);
+    }
   };
 
   //const [selectedPriority, setSelectedPriority] = useState("Crítico");
@@ -87,7 +84,7 @@ const ProductivityDashboard = (props) => {
   };
 
   const handlePriorityChange = (id, newPriority) => {
-    setTasks((prevTasks) => {
+    /* setTasks((prevTasks) => {
       const updatedTasks = prevTasks.map((task) =>
         task.id === id ? { ...task, priority: newPriority } : task
       );
@@ -97,7 +94,8 @@ const ProductivityDashboard = (props) => {
       sortByPriority(updatedTasks);
 
       return updatedTasks;
-    });
+    }); */
+    updateTask(id, { priority: newPriority });
   };
 
   // const handlePriorityChange = (newPriority) => {
@@ -118,6 +116,60 @@ const ProductivityDashboard = (props) => {
       // Ordenar por prioridad si ambas son incompletas
       return priorityValues[a.priority] - priorityValues[b.priority];
     });
+  };
+
+  // Crear una nueva tarea
+  const addTask = (newTask) => {
+    /*const newTask = {
+      id: Date.now(),
+      title,
+      description,
+      completed: false,
+      priority: "Chill",
+    };*/
+
+    axios
+      .post(API_URL, newTask)
+      .then((response) => {
+        setTasks([...tasks, response.data]);
+      })
+      .catch((error) => {
+        console.error("Error adding task:", error);
+      });
+  };
+
+  // Actualizar una tarea
+  const updateTask = (id, updatedFields) => {
+    axios
+      .put(`${API_URL}/${id}`, updatedFields)
+      .then((response) => {
+        console.log(response.data);
+        //setTasks(tasks.map((task) => (task.id === id ? response.data : task)));
+        setTasks((prevTasks) => {
+          const updatedTasks = prevTasks.map((task) =>
+            task.id === id ? response.data : task
+          );
+
+          sortByPriority(updatedTasks);
+
+          return updatedTasks;
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating task:", error);
+      });
+  };
+
+  // Eliminar una tarea
+  const deleteTask = (id) => {
+    axios
+      .delete(`${API_URL}/${id}`)
+      .then(() => {
+        //setTasks(tasks.filter((task) => task.id !== id));
+      })
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+      });
   };
 
   return (
@@ -173,6 +225,7 @@ const ProductivityDashboard = (props) => {
             <div className="card-additives">
               <PrioritySelector
                 taskId={task.id}
+                priorityProp={task.priority}
                 onPriorityChange={handlePriorityChange}
               />
               <div

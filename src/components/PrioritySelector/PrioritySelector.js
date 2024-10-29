@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./PrioritySelector.css";
 
-function PrioritySelector({ taskId, onPriorityChange }) {
-  const [priority, setPriority] = useState("Chill");
+function PrioritySelector({ taskId, priorityProp, onPriorityChange }) {
+  const [priority, setPriority] = useState(priorityProp);
 
   const handleChange = (event) => {
     const selectedPriority = event.target.value;

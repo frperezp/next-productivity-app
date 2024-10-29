@@ -63,7 +63,7 @@ body {
 .input-title:focus,
 .input-description:focus {
   font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
-  border-bottom: 2px solid #c59b00; /*#007bff;*/
+  border-bottom: 2px solid #d9aa00; /*#007bff;*/
 }
 
 .button-container {
@@ -75,7 +75,7 @@ body {
 }
 
 .add-button {
-  background-color: #ffc800;
+  background-color: #ca9e00;
   border: none;
   color: #fff;
   width: 40px;
@@ -90,7 +90,7 @@ body {
 }
 
 .add-button:hover {
-  background-color: #c59b00; /*#0056b3;*/
+  background-color: #d9aa00; /*#0056b3;*/
 }
 
 .task-list {
@@ -197,5 +197,9 @@ body {
 }
 
 .red-icon {
-  color: red;
+  color: rgb(167, 30, 30);
+}
+
+.red-icon:hover {
+  color: rgb(205, 33, 33); /*#0056b3;*/
 }
