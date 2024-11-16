@@ -19,6 +19,8 @@ import "./App.css";
 import ProductivityDashboard from "./components/ProductivityDashboard/ProductivityDashboard";
 
 const App = () => {
+  const API_URL =
+    NODE_ENV === "development" ? process.env.REACT_APP_API_URL : window.API_URL;
   /*const [tasks, setTasks] = useState([]);
 
   useEffect(() => {

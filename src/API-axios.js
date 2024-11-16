@@ -3,7 +3,8 @@ import axios from "axios";
 
 function APIAxios() {
   const [tasks, setTasks] = useState([]);
-  const API_URL = "http://localhost:5000/tasks";
+  const { REACT_APP_API_URL } = process.env;
+  const API_URL = REACT_APP_API_URL;
 
   // Leer tareas
   useEffect(() => {
