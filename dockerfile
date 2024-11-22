@@ -16,6 +16,8 @@ RUN npm install
 #Copying all the application source code and files to the working directory `app`
 COPY . .
 
+ENV REACT_APP_BASE_URL=http://localhost:5000/tasks
+
 #Exposing the container to run on this port 3000
 EXPOSE 3000
 

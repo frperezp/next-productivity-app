@@ -5,9 +5,14 @@
   src: url("../../assets/Dosis-VariableFont_wght.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/Poppins-SemiBold.ttf") format("truetype");
+}
+
 body {
   background-color: #1d1f2bff; /*#f5f5f5;*/
-  font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
+  font-family: "Poppins", "Helvetica Neue", "Montserrat", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +49,7 @@ body {
 
 .input-title,
 .input-description {
-  font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
+  /* font-family: "Poppins", "Helvetica Neue", "Montserrat", sans-serif; */
   border: none;
   border-bottom: 1px solid #ddd;
   background: #2f313eff;
@@ -62,7 +67,7 @@ body {
 
 .input-title:focus,
 .input-description:focus {
-  font-family: "Dosis", "Helvetica Neue", "Montserrat", sans-serif;
+  /*   font-family: "Poppins", "Helvetica Neue", "Montserrat", sans-serif; */
   border-bottom: 2px solid #d9aa00; /*#007bff;*/
 }
 
