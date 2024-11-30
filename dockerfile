@@ -1,25 +1,29 @@
-# It uses node:18-alpine as the base image for the Node.js application
-FROM node:18-alpine
+# Use a Node.js image to build the React app
+FROM node:16 AS build
 
-# It installs the nodemon package globally for monitoring and watching the backend Express server
-# RUN npm install -g nodemon
-
-# Creating the working directory named `app`
+# Set working directory
 WORKDIR /app
 
-# Copying all the tools and dependencies in the package.json file to the working directory `app`
-COPY package.json .
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-#Installing all the tools and dependencies in the container
+# Install dependencies
 RUN npm install
 
-#Copying all the application source code and files to the working directory `app`
+# Copy the application code
 COPY . .
 
-ENV REACT_APP_BASE_URL=http://api-node:5000/tasks
+# Build the React application
+RUN npm run build
 
-#Exposing the container to run on this port 3000
-EXPOSE 3000
+# Use a lightweight server to serve the build files
+FROM nginx:alpine
 
-#Command to start the Docker container for the backed server application
-CMD ["npm", "start"]
+# Copy the build files to the NGINX public directory
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]

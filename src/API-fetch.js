@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function APIFetch() {
   const [tasks, setTasks] = useState([]);
-  const API_URL = "http://localhost:5000/tasks";
+  const API_URL = ""; // "http://localhost:5000/tasks";
 
   // Leer tareas
   useEffect(() => {

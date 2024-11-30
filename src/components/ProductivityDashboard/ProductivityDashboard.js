@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./ProductivityDashboard.css";
+import "./ProductivityDashboard-cs.css";
 
 import { faCheck, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import PrioritySelector from "../PrioritySelector/PrioritySelector";
 const ProductivityDashboard = (props) => {
   const [tasks, setTasks] = useState([]);
 
-  const API_URL = "http://localhost:5000/tasks";
+  const API_URL = "http://localhost:5000"; //process.env.REACT_APP_BASE_URL;
 
   const sortByPriority = (updatedTasks) => {
     // Ordenar todas las tareas: primero las no completadas por prioridad, luego las completadas
