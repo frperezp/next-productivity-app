@@ -13,6 +13,8 @@ RUN npm install
 # Copy the application code
 COPY . .
 
+ENV REACT_APP_BASE_URL=http://192.168.1.179:5000/tasks
+
 # Build the React application
 RUN npm run build
 
